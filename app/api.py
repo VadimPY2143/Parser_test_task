@@ -53,7 +53,7 @@ async def comments_endpoint(
         clean_url, comments = await service.fetch_comments(url, date_to_dt)
     except (asyncio.TimeoutError, PlaywrightTimeoutError):
         raise HTTPException(status_code=408, detail="Timeout while parsing comments")
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         logger.exception("Failed to parse comments", exc_info=exc)
         raise HTTPException(status_code=500, detail=f"Unexpected error: {exc}") from exc
 
